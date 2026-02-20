@@ -23,7 +23,14 @@ export const LoginScreen = () => {
 
 //funcion para caprurar los valores de mi formulario
 const handleChangeValue = (name:string,value:string) =>{
-  console.log(name," ",value);
+  //console.log(name," ",value);
+  //funciuon para cambiar el estado del formulario
+  setFormLogin({...formLogin,[name]:value});
+}
+
+//funcion para iniciar sesion
+const handleSingIn=():void=>{
+  console.log(formLogin);
 }
 
   return (
@@ -35,9 +42,9 @@ const handleChangeValue = (name:string,value:string) =>{
           <Text>Realiza yus compras de manera rápida y segura</Text> 
           <View style={stylesGlobal.containerInput}>
           <InputComponents placeholder='Email' keyboardType='email-address' handleChangeValue={handleChangeValue} name='email'/>
-          <InputComponents placeholder='Contraseña' keyboardType='default' handleChangeValue={handleChangeValue} name='password'/>
+          <InputComponents placeholder='Contraseña' keyboardType='default' handleChangeValue={handleChangeValue} name='password' isPassword={true}/>
           </View>
-          <ButtonComponent text='Enviar'/>
+          <ButtonComponent text='Enviar' onPress={handleSingIn}/>
         </BodyComponents>
     </View>
   )

@@ -7,15 +7,17 @@ interface Props {
     keyboardType: KeyboardTypeOptions;
     handleChangeValue:(name:string,value:string)=>void;
     name:string;
+    isPassword?:boolean;
 }
 
-export const InputComponents = ({ placeholder, keyboardType, handleChangeValue, name}: Props) => {
+export const InputComponents = ({ placeholder, keyboardType, handleChangeValue, name,isPassword=false}: Props) => {
     return (
         <TextInput
             placeholder={placeholder}
             keyboardType={keyboardType}
             onChangeText={(value)=>handleChangeValue(name,value)}
-            style={stylesGlobal.usuarioInput} />
+            style={stylesGlobal.usuarioInput} 
+            secureTextEntry={isPassword}/>
 
     )
 }
