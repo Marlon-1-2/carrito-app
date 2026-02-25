@@ -14,7 +14,8 @@ export const stylesGlobal = StyleSheet.create({
         borderTopLeftRadius:30,
         borderTopRightRadius:30,
         paddingHorizontal:30,
-        paddingTop:40
+        paddingTop:40,
+        paddingVertical:40,
     },
     titleWelcomw:{
         fontSize:17,
@@ -52,5 +53,101 @@ export const stylesGlobal = StyleSheet.create({
         color:PRIMARY_COLOR,
         fontWeight:'bold',
         textAlign:'center'
+    },
+    containerCard:{
+        //flexDirection:'row',
+        flex:1,
+        justifyContent:'center',
+        //alignItems:'center',
+        padding:15,
+        borderWidth:1,
+        borderColor:QUATERNARY_COLOR,
+        borderRadius:10,
+        margin:7,
+        borderStyle:'solid',
+        shadowColor: "#000",
+        shadowOpacity: 0.25,
+        shadowRadius: 2.65,
+        elevation: 4,
+        
+    },
+    titleCard:{
+        fontSize:16,
+        fontWeight:'bold',
+        //paddingLeft:10
+    },
+    imageCard:{
+        width:90,
+        height:80,
+        borderRadius:10,
+        marginBottom:10,
+        alignSelf:'center',
+        marginTop:10
+    },
+    iconCard:{
+        flex:1,
+        alignItems:'flex-end',
+        marginTop:10
+    },
+    containerModal:{
+        flex:1,
+        justifyContent:'center',
+        alignItems:'center',
+        backgroundColor:'rgba(0,0,0,0.5)'
+    },
+    bodyModal:{
+        //margin:25,
+        backgroundColor:SECONDARY_COLOR,
+        borderRadius:10,
+        padding:20,
+    },
+    headerModal:{
+        flexDirection:'row',
+        justifyContent:'space-between',
+        borderBottomColor:QUATERNARY_COLOR,
+        borderBottomWidth:1,
+        padding:10
+    },
+    titleModal:{
+        fontSize:18,
+        fontWeight:'bold',
+        width:'90%'
+    },
+    imageModal:{
+        width:'100%',
+        height:200,
+        borderRadius:10,
+        marginTop:10
+    },
+    containerbutonModal:{
+        flexDirection:'row',
+        justifyContent:'center',
+        alignItems:'center'
+    },
+    butonModal:{
+        backgroundColor:TERTIARY_COLOR,
+        height:50,
+        width:50,
+        borderRadius:50,
+        justifyContent:'center',
+        alignItems:'center',
+        margin:15
+    },
+    butoTextModal:{
+        color:SECONDARY_COLOR,
+        fontSize:25,
+        //fontWeight:'bold'
+    },
+    priceModal:{
+        fontSize:18,
+        fontWeight:'bold',
+    },
+    textStock:{
+        color:'red',
+        fontSize:30,
+        textAlign:'center',
+        marginVertical:10,
+        fontWeight:'bold'
     }
+    
 }) 
