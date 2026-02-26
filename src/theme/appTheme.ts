@@ -87,7 +87,7 @@ export const stylesGlobal = StyleSheet.create({
     iconCard:{
         flex:1,
         alignItems:'flex-end',
-        marginTop:10
+        
     },
     containerModal:{
         flex:1,
@@ -114,10 +114,11 @@ export const stylesGlobal = StyleSheet.create({
         width:'90%'
     },
     imageModal:{
-        width:'100%',
+        width:200,
         height:200,
         borderRadius:10,
-        marginTop:10
+        marginTop:10,
+        alignSelf:'center'
     },
     containerbutonModal:{
         flexDirection:'row',
@@ -141,6 +142,7 @@ export const stylesGlobal = StyleSheet.create({
     priceModal:{
         fontSize:18,
         fontWeight:'bold',
+        paddingBottom:10
     },
     textStock:{
         color:'red',
@@ -148,6 +150,47 @@ export const stylesGlobal = StyleSheet.create({
         textAlign:'center',
         marginVertical:10,
         fontWeight:'bold'
+    },
+    headerHome:{
+        flexDirection:'row',
+        alignItems:'center',
+    },
+    iconHome:{
+        flex:1,
+        alignItems:'flex-end',
+        paddingTop:5,
+        paddingHorizontal:40
+    },
+    textIconCart:{
+        backgroundColor:SECONDARY_COLOR,
+        fontSize:13,
+        fontWeight:'bold',
+        paddingHorizontal:5,
+        borderRadius:10,
+    },
+    headerTable:{
+        flexDirection:'row',
+        justifyContent:'space-between',
+        //paddingHorizontal:10,
+    },
+    headerDescriptionTable:{
+        flexDirection:'row',
+    },
+    headerTextTable:{
+        fontSize:16,
+        fontWeight:'bold',
+        color:PRIMARY_COLOR
+    },
+    textWidhTable:{
+        width:150,
+        //textAlign:'center'
+    },
+    containerTotalPay:{
+        alignItems:'flex-end',
+        marginTop:10
+    },
+    textTotalPay:{
+        fontSize:18,
+        fontWeight:'bold',
     }
-    
 }) 
