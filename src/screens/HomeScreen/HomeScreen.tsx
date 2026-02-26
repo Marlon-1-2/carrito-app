@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { FlatList, Text, View } from 'react-native'
+import { Alert, FlatList, Text, View } from 'react-native'
 import { TitleComponents } from '../../components/TitleComponents';
 import { BodyComponents } from '../../components/BodyComponents';
 import { CardProductComponent } from './components/CardProductComponent';
@@ -18,7 +18,7 @@ export interface Products {
     pathImage: string;
 }
 
-export interface Cart{
+export interface Cart {
     id: number;
     name: string;
     price: number;
@@ -84,7 +84,7 @@ export const HomeScreen = () => {
 
     //hook usestate:permite gestionar el estado de los productos
     const [productsState, setProductsState] = useState<Products[]>(products);
-    
+
     //hook use state para gestionar el estado del carrito de compras, que es un array de productos
     const [cart, setCart] = useState<Cart[]>([]); //arreglo carrito
 
@@ -93,59 +93,83 @@ export const HomeScreen = () => {
 
     //Funcion para actualizar el estdo del modal del carrito de compras
     const handleShowModalCart = (): void => {
+        if (cart.length === 0) {
+            Alert.alert(
+                "Carrito",
+                "Su carrito está vacío"
+            );
+            return;
+        }
         setShowModalCart(!showModalCart);
     }
 
     //funcion para controlar la cantidad de productos a comprar
     const changeStockProduct = (id: number, cantidad: number) => {
         const newProducts = productsState.map(item => item.id == id ? { ...item, stock: item.stock - cantidad } : item);
-    //modificar el estado de los productos        
-    setProductsState(newProducts);
+        //modificar el estado de los productos        
+        setProductsState(newProducts);
         //llamar la funcion para agregar el producto al carrito, pasando el id del producto y la cantidad a comprar
         addProduct(id, cantidad);
     }
 
     //funcion para agregar productos al carrito
-    const addProduct=(id:number,quantity:number):void=>{
+    const addProduct = (id: number, quantity: number): void => {
         const product = productsState.find(product => product.id == id);
 
         //sino existe el producto, no se agrega al carrito
-        if(!product) {
+        if (!product){
             return;
-        }
+        } 
 
-        //crear el objeto del producto
-        const newCart: Cart = {
-            id: product.id,
-            name: product.name,
-            price: product.price,
-            quantity: quantity,
-            total: product.price * quantity
-        }
+        // Verificar si ya existe en el carrito
+        const existProduct = cart.find(item => item.id === id);
 
-        //agregar el producto al carrito
-        setCart([...cart, newCart]);
-        console.log(cart);
-    }
+        if (existProduct) {
+
+            const updatedCart = cart.map(item =>
+                item.id === id
+                    ? {
+                        ...item,
+                        quantity: item.quantity + quantity,
+                        total: (item.quantity + quantity) * item.price
+                    }
+                    : item
+            );
+
+            setCart(updatedCart);
+
+        } else {
+            //crear un nuevo objeto de tipo Cart con los datos del producto y la cantidad a comprar
+            const newCart: Cart = {
+                id: product.id,
+                name: product.name,
+                price: product.price,
+                quantity: quantity,
+                total: product.price * quantity
+            };
+            // Agregar el nuevo producto al carrito
+            setCart([...cart, newCart]);
+        }
+    };
 
     return (
         <View>
             <View style={stylesGlobal.headerHome}>
-            <TitleComponents title='Productos' />
-            <View style={stylesGlobal.iconHome}>
-                <Text style={stylesGlobal.textIconCart}>{cart.length}</Text>
-            <Icon name="shopping-cart" size={30} color={SECONDARY_COLOR} onPress={handleShowModalCart}/>
-            </View>
+                <TitleComponents title='Productos' />
+                <View style={stylesGlobal.iconHome}>
+                    <Text style={stylesGlobal.textIconCart}>{cart.length}</Text>
+                    <Icon name="shopping-cart" size={30} color={SECONDARY_COLOR} onPress={handleShowModalCart} />
+                </View>
             </View>
             <BodyComponents>
                 <FlatList
                     data={productsState}
                     keyExtractor={(item) => item.id.toString()}
-                    renderItem={({ item }) => <CardProductComponent item={item} changeStockProduct={changeStockProduct}/>}
+                    renderItem={({ item }) => <CardProductComponent item={item} changeStockProduct={changeStockProduct} />}
                     numColumns={2}
-                    columnWrapperStyle={{ justifyContent: 'space-between' }}/>
+                    columnWrapperStyle={{ justifyContent: 'space-between' }} />
             </BodyComponents>
-            <ModalCartComponent isVisible={showModalCart} cart={cart} hiddenModal={handleShowModalCart}/>
+            <ModalCartComponent isVisible={showModalCart} cart={cart} hiddenModal={handleShowModalCart} />
         </View>
     )
 }
